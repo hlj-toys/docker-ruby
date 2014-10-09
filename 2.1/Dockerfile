@@ -30,6 +30,10 @@ RUN cd /tmp && \
       rm -rf ruby-$RUBY_VERSION && \
       rm -f ruby-$RUBY_VERSION.tar.gz
 
+# Set the gem sources to ruby.taobao.org
+RUN gem sources --remove https://rubygems.org/
+RUN gem sources -a http://mirrors.aliyun.com/rubygems/
+
 # skip installing gem documentation
 RUN echo 'gem: --no-rdoc --no-ri' >> .gemrc
 
