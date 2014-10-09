@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y curl \
 ENV RUBY_MAJOR 2.1
 ENV RUBY_VERSION 2.1.3
 
-ADD http://ruby.taobao.org/mirrors/ruby/ruby-$RUBY_VERSION.tar.gz /tmp/
+ADD http://cache.ruby-lang.org/pub/ruby/2.1/ruby-$RUBY_VERSION.tar.gz /tmp/
 RUN cd /tmp && \
       tar -xzf ruby-$RUBY_VERSION.tar.gz && \
       cd ruby-$RUBY_VERSION && \
