@@ -30,14 +30,17 @@ RUN cd /tmp && \
       rm -rf ruby-$RUBY_VERSION && \
       rm -f ruby-$RUBY_VERSION.tar.gz
 
-# Set the gem sources to ruby.taobao.org
+# Set the gem sources to mirrors.aliyun.com/rubygems/
 RUN gem sources --remove https://rubygems.org/
 RUN gem sources -a http://mirrors.aliyun.com/rubygems/
 
 # skip installing gem documentation
-RUN echo 'gem: --no-rdoc --no-ri' >> .gemrc
+RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 
 RUN gem install bundler
+
+# workaround for $HOME
+RUN echo /root > /etc/container_environment/HOME
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
