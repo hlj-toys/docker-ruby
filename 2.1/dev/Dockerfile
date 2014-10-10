@@ -26,5 +26,8 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
 	&& npm install -g npm@"$NPM_VERSION" \
 	&& npm cache clear
 
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org \
+  && npm cache clean
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

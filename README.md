@@ -3,10 +3,13 @@ docker-ruby
 
 ###适合中国用户的Ruby语言镜像
 
-*基于 [betacz/baseimage-zh](https://registry.hub.docker.com/u/betacz/baseimage-zh/)
-*
+* 基于 [betacz/baseimage-zh](https://registry.hub.docker.com/u/betacz/baseimage-zh/)
 
-###版本
+* RubyGrems 源更换为<http://mirrors.aliyun.com/rubygems/>
+* dev中安装了[cnpm](http://npm.taobao.org/)
+
+
+###Tags
 
 ```
   1.9.3        ruby 1.9.3-p547
