@@ -13,9 +13,9 @@ docker-ruby
 
 ```
   1.9.3        ruby 1.9.3-p547
-  1.9.3-dev    ruby 1.9.3-p547 + node.js 0.10.32
+  1.9.3-dev    ruby 1.9.3-p547 + node.js 0.12.0
   2.1.3        ruby 2.1.3
-  ​2.1.3-dev    ruby 2.1.3 + node.js 0.10.32
+  ​2.1.3-dev    ruby 2.1.3 + node.js 0.12.0
 ```
 
 ###使用方法
