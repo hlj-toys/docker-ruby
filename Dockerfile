@@ -24,3 +24,4 @@ RUN npm install -g cnpm --registry=https://registry.npm.taobao.org \
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
