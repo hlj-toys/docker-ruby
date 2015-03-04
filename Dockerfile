@@ -1,4 +1,4 @@
-FROM betacz/ruby:1.9.3
+FROM betacz/baseimage-zh
 MAINTAINER Beta CZ <hlj8080@gmail.com>
 
 ENV HOME /root
@@ -6,21 +6,41 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-# node 0.12.0
-RUN apt-get update && apt-get install -y \
-		ca-certificates
+# ruby 2.1.3
+# From: https://github.com/docker-library/ruby/blob/master/2.1/Dockerfile
+RUN apt-get update && apt-get install -y curl \
+      procps\
+      build-essential \
+      zlib1g-dev \
+      libssl-dev \
+      libreadline6-dev \
+      libyaml-dev
 
-ENV NODE_VERSION 0.12.0
-ENV NPM_VERSION 2.5.1
+ENV RUBY_MAJOR 2.1
+ENV RUBY_VERSION 2.1.3
 
-RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
-	&& tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
-	&& rm "node-v$NODE_VERSION-linux-x64.tar.gz" \
-	&& npm install -g npm@"$NPM_VERSION" \
-	&& npm cache clear
+ADD http://cache.ruby-lang.org/pub/ruby/2.1/ruby-$RUBY_VERSION.tar.gz /tmp/
+RUN cd /tmp && \
+      tar -xzf ruby-$RUBY_VERSION.tar.gz && \
+      cd ruby-$RUBY_VERSION && \
+      ./configure && \
+      make && \
+      make install && \
+      cd .. && \
+      rm -rf ruby-$RUBY_VERSION && \
+      rm -f ruby-$RUBY_VERSION.tar.gz
 
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org \
-	&& npm cache clean
+# Set the gem sources to mirrors.aliyun.com/rubygems/
+RUN gem sources --remove https://rubygems.org/
+RUN gem sources -a http://mirrors.aliyun.com/rubygems/
+
+# skip installing gem documentation
+RUN echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
+
+RUN gem install bundler
+
+# workaround for $HOME
+RUN echo /root > /etc/container_environment/HOME
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
