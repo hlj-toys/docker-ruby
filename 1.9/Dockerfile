@@ -6,8 +6,8 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-# ruby 2.1.3
-# From: https://github.com/docker-library/ruby/blob/master/2.1/Dockerfile
+# ruby  1.9.3
+# From: https://github.com/docker-library/ruby/blob/master/1.9/Dockerfile
 RUN apt-get update && apt-get install -y curl \
       procps\
       build-essential \
