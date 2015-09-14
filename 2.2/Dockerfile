@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y curl \
 ENV RUBY_MAJOR 2.2
 ENV RUBY_VERSION 2.2.3
 
-ADD http://cache.ruby-lang.org/pub/ruby/2.1/ruby-$RUBY_VERSION.tar.gz /tmp/
+ADD http://cache.ruby-lang.org/pub/ruby/2.2/ruby-$RUBY_VERSION.tar.gz /tmp/
 RUN cd /tmp && \
       tar -xzf ruby-$RUBY_VERSION.tar.gz && \
       cd ruby-$RUBY_VERSION && \
